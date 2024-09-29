@@ -1,0 +1,1 @@
+document.getElementById("welcome-text").innerText = "Welcome to the Home Page!";
