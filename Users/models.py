@@ -7,9 +7,9 @@ from django.contrib.auth.models import Group, Permission
 class Customer(AbstractUser):
     phone = models.CharField(max_length=15)
     shipping_address = models.TextField(null=True, blank=True)
-    billing_address = models.TextField()
+    billing_address = models.TextField(null=True, blank=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default.jpg')
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True, blank=True)
 
     # Override groups and user_permissions to avoid conflicts
     groups = models.ManyToManyField(
