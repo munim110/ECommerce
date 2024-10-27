@@ -10,12 +10,20 @@ def signin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = Customer.objects.get(username=username)
-        print(user.password)
+        try:
+            user = Customer.objects.get(username=username)
+        except:
+            context = {
+                "message": "User not found. Please sign up."
+            }
+            return render(request, 'login.html', context)
         if check_password(password, user.password):
             login(request, user)
             return redirect(home)
-        return render(request, 'login.html')
+        context = {
+            "message": "Invalid password. Please try again."
+        }
+        return render(request, 'login.html', context)
     return render(request, 'login.html')
 
 

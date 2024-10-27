@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Home',
     'Users',
+    'Products',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'Home/templates',
             BASE_DIR / 'Users/templates',
+            BASE_DIR / 'Products/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -125,6 +127,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'Home/static',
     BASE_DIR / 'Users/static',
+    BASE_DIR / 'Products/static',
 ]
 
 MEDIA_URL = 'media/'

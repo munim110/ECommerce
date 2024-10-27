@@ -1,0 +1,33 @@
+.products
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.products.h2
+{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#description
+{
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#price
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#image
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
