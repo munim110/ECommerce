@@ -11,6 +11,21 @@
     margin-bottom: 10px;
 }
 
+a
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    text-align: center;
+
+}
+
 #description
 {
     font-size: 1.2em;

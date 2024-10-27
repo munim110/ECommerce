@@ -1,0 +1,22 @@
+{% load static %}
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="{% static 'product.css' %}">
+    </head>
+    <body>
+        <h1>Products</h1>
+        <div class="products">
+            <div class="product">
+                <h2>{{ product.name }}</h2>
+                <p id="description">{{ product.description }}</p>
+                <p id="price">Price: {{ product.price }}</p>
+                <img id="image" src="{{ product.image.url }}" alt="product image" width="200" height="200">
+            </div>
+        </div>
+    </body>
+    <script>
+        let var1 = "{{ product.name }}";
+        console.log(var1);
+    </script>
+</html>

@@ -13,6 +13,7 @@
                     <p id="description">{{ product.description }}</p>
                     <p id="price">Price: {{ product.price }}</p>
                     <img id="image" src="{{ product.image.url }}" alt="product image" width="200" height="200">
+                    <a href="{% url 'product_detail' product.id %}">Details</a>
                 </div>
             {% endfor %}
         </div>
