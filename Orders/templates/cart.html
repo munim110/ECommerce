@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+</head>
+<body>
+    <div class="cart-container">
+        <h1>Your Shopping Cart</h1>
+        <div class="cart-items">
+            {% for item in cart_items %}
+                <div class="cart-item">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    <div class="item-details">
+                        <h2>{{ item.product.name }}</h2>
+                        <p> Price: <span id="item-price-{{item.product.id}}">${{ item.product.price }}</span></p>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity({{ item.product.id }}, -1)">-</button>
+                            <span id="quantity-{{ item.product.id }}">{{ item.quantity }}</span>
+                            <button onclick="updateQuantity({{ item.product.id }}, 1)">+</button>
+                        </div>
+                    </div>
+                    <p class="item-total-price" id="item-total-{{ item.product.id }}">
+                        {{ item.product.price }}
+                    </p>
+                    <button class="remove-item" onclick="removeItem({{ item.product.id }})">Remove</button>
+                </div>
+            {% empty %}
+                <p>Your cart is empty!</p>
+            {% endfor %}
+        </div>
+        <div class="cart-summary">
+            <h3>Total: <span id="cart-total"> $0</span></h3>
+            <button class="checkout-button">Checkout</button>
+        </div>
+    </div>
+    <script src="{% static 'js/cart.js' %}"></script>
+    <script>
+        let cartTotal = 0;
+        for (let item of document.getElementsByClassName('cart-item')) {
+            const price = parseFloat(item.querySelector('.item-total-price').innerText.replace('$', ''));
+            const quantity = parseInt(item.querySelector('.quantity-controls span').innerText);
+            const total = price * quantity;
+            cartTotal += total;
+            item.querySelector('.item-total-price').innerText = `$${total}`;
+        }
+
+        document.getElementById('cart-total').innerText = `$${cartTotal}`;
+    </script>
+</body>
+</html>
