@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from .models import KeyValuePair
 
 # Create your views here.
 
