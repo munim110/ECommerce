@@ -14,8 +14,10 @@
                     <p id="price">Price: {{ product.price }}</p>
                     <img id="image" src="{{ product.image.url }}" alt="product image" width="200" height="200">
                     <a href="{% url 'product_detail' product.id %}">Details</a>
+                    <button onclick="addToCart({{ product.id }})">Add to Cart</button>
                 </div>
             {% endfor %}
         </div>
     </body>
+    <script src="{% static 'product.js' %}"></script>
 </html>

@@ -46,3 +46,15 @@ a
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+button
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    color: #000000;
+    text-align: center;
+}

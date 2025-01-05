@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form action="/users/signin/" method="post">
+    <form method="post" onsubmit="formsubmit()">
         {% csrf_token %}
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
@@ -20,4 +20,48 @@
         {% endif %}
     </div>
 </body>
+<script>
+    const base_url = window.location.origin;
+    function formsubmit()
+    {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            // Get the form data
+            console.log('form submission prevented');
+            const formData = new FormData(form);
+            const data = {
+                username: formData.get('username'),
+                password: formData.get('password')
+            };
+            // Send the data to the server and get the auth tokens
+            const response = await fetch(`${base_url}/api/token/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            if (response.ok) {
+                // Save the tokens in the local storage
+                localStorage.setItem('access', result.access);
+                localStorage.setItem('refresh', result.refresh);
+                // Redirect to the products page
+                window.location.href = `${base_url}/products/`;
+            } else {
+                // Display the error message
+                const error = document.querySelector('.error');
+                error.innerHTML = `<div class="error-text"><p>${result.detail}</p></div>`;
+            }
+            // Add the csrf_token to the form
+            const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+            formData.append('csrfmiddlewaretoken', csrf_token);
+            
+            // now submit the form normally
+            form.submit();
+        });
+    }
+
+</script>
 </html>
