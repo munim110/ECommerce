@@ -33,3 +33,6 @@ function addToCart(product_id)
     }
 
 }
+
+// why do we stringify the data before sending it to the server?
+// The fetch API does not accept a JSON object as a body. It only accepts a string or a FormData object.
