@@ -1,0 +1,36 @@
+
+
+<html>
+<head>
+    <title>Chat</title>
+</head>
+<div class="container">
+    <h2>Class Channels</h2>
+    
+    <h3>Available Channels</h3>
+    {% if available_channels %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Channel Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for channel in available_channels %}
+                <tr>
+                    <td>{{ channel.name }}</td>
+                    <td>{{ channel.description }}</td>
+                    <td>
+                        <a href="{% url 'join_channel' channel.id %}" class="btn">Join Channel</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No channels available to join.</p>
+    {% endif %}
+</div>
+</html>

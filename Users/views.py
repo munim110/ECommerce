@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
-from Home.views import home
+from django.shortcuts import render, redirect, reverse
 from .models import Customer
+from Chat.views import chat
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import check_password
 
@@ -19,7 +19,7 @@ def signin(request):
             return render(request, 'login.html', context)
         if check_password(password, user.password):
             login(request, user)
-            return redirect(home)
+            return redirect(reverse('channel_list'))
         context = {
             "message": "Invalid password. Please try again."
         }

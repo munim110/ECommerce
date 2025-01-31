@@ -37,12 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
     'Home',
     'Users',
     'Products',
     'Orders',
     'Campaign',
+    'Chat',
+    'channels',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -68,6 +71,7 @@ TEMPLATES = [
             BASE_DIR / 'Users/templates',
             BASE_DIR / 'Products/templates',
             BASE_DIR / 'Orders/templates',
+            BASE_DIR / 'Chat/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -195,3 +199,15 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+ASGI_APPLICATION = "ECommerce.asgi.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

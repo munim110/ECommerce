@@ -1,0 +1,55 @@
+<div class="container">
+    <h2>{{ channel.name }} Chat</h2>
+    
+    <div id="chat-messages" class="message-container">
+        {% for message in messages %}
+        <div class="message">
+            <strong>{{ message.sender.username }}</strong>
+            <p>{{ message.content }}</p>
+            <small>{{ message.timestamp|date:"M d, Y H:i" }}</small>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <form id="chat-form">
+        <input type="text" id="message-input" autocomplete="off" required>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<script>
+    const channelId = {{ channel.id }};
+    const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${channelId}/`);
+    
+    const messageContainer = document.getElementById('chat-messages');
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message-input');
+    
+    chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const message = messageInput.value;
+        
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+        
+        messageInput.value = '';
+    });
+    
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.innerHTML = `
+            <strong>${data.sender}</strong>
+            <p>${data.message}</p>
+            <small>${data.timestamp}</small>
+        `;
+        
+        // Append new messages to the bottom
+        messageContainer.appendChild(messageElement);
+        
+        // Optional: Auto-scroll to new message
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    };
+</script>
